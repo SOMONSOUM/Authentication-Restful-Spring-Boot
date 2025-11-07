@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: SpringBootRestApi
+  datasource:
+    url: jdbc:mysql://localhost:3307/spring_boot_rest_api
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+jwt:
+  secret: n9+5Dg3aKQ8p7mEYH4tZr3VqLsUw0BxzYf9nQmXvE0w=
+  access:
+    expiration: 900000 # 15 minutes
+  refresh:
+    expiration: 604800000 # 7 days
+
+server:
+  port: 8080
+
