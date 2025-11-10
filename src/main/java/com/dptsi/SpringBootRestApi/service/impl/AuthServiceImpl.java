@@ -5,6 +5,8 @@ import com.dptsi.SpringBootRestApi.dto.request.LogoutRequest;
 import com.dptsi.SpringBootRestApi.dto.request.RefreshTokenRequest;
 import com.dptsi.SpringBootRestApi.dto.response.LoginResponse;
 import com.dptsi.SpringBootRestApi.dto.response.RefreshTokenResponse;
+import com.dptsi.SpringBootRestApi.exception.InvalidCredentialsException;
+import com.dptsi.SpringBootRestApi.exception.InvalidTokenException;
 import com.dptsi.SpringBootRestApi.model.Token;
 import com.dptsi.SpringBootRestApi.model.User;
 import com.dptsi.SpringBootRestApi.repository.TokenRepository;
@@ -42,12 +44,15 @@ public class AuthServiceImpl implements AuthService {
     public LoginResponse login(LoginRequest request) {
         Optional<User> user = userRepository.findByEmail(request.getEmail());
         if (user.isEmpty()) {
-            throw new RuntimeException("Invalid email or password");
+            throw new InvalidCredentialsException("Invalid email or password");
         }
 
         if (!passwordEncoder.matches(request.getPassword(), user.get().getPassword())) {
-            throw new RuntimeException("Invalid password");
+            throw new InvalidCredentialsException("Invalid password");
         }
+
+        Token token = tokenRepository.findByUser(user.get())
+                .orElse(new Token());
 
         String accessToken = jwtService.generateAccessToken(user.get().getId());
         String refreshToken = jwtService.generateRefreshToken(user.get().getId());
@@ -57,8 +62,6 @@ public class AuthServiceImpl implements AuthService {
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime();
 
-
-        Token token = new Token();
         token.setToken(refreshToken);
         token.setExpiresAt(expirationDateTime);
         token.setUser(user.get());
@@ -76,11 +79,11 @@ public class AuthServiceImpl implements AuthService {
     public RefreshTokenResponse refreshToken(RefreshTokenRequest request) {
         Optional<Token> token = tokenRepository.findByToken(request.getRefreshToken());
         if (token.isEmpty()) {
-            throw new RuntimeException("Invalid refresh token");
+            throw new InvalidTokenException("Invalid refresh token");
         }
 
         if (jwtService.isTokenExpired(token.get().getToken())) {
-            throw new RuntimeException("Refresh token expired");
+            throw new InvalidTokenException("Refresh token expired");
         }
 
         String accessToken = jwtService.generateAccessToken(token.get().getUser().getId());
@@ -102,7 +105,7 @@ public class AuthServiceImpl implements AuthService {
 
         return response;
     }
-    
+
     @Override
     public User me(HttpServletRequest request) {
         String token = request.getHeader("Authorization").substring(7);
@@ -115,7 +118,7 @@ public class AuthServiceImpl implements AuthService {
         Optional<Token> token = tokenRepository.findByToken(request.getRefreshToken());
 
         if (token.isEmpty()) {
-            throw new RuntimeException("Invalid refresh token");
+            throw new InvalidTokenException("Invalid refresh token");
         }
 
         tokenRepository.delete(token.get());

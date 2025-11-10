@@ -1,8 +1,12 @@
 package com.dptsi.SpringBootRestApi.controller;
 
 import com.dptsi.SpringBootRestApi.dto.request.RegisterUserRequest;
+import com.dptsi.SpringBootRestApi.dto.response.ApiResponse;
 import com.dptsi.SpringBootRestApi.model.User;
 import com.dptsi.SpringBootRestApi.service.impl.UserServiceImpl;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,12 +19,26 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public User createUser(@RequestBody RegisterUserRequest request) {
-        return userService.createUser(request);
+    public ResponseEntity<ApiResponse<User>> createUser(@Valid @RequestBody RegisterUserRequest request) {
+        User user = userService.createUser(request);
+
+        ApiResponse<User> response = new ApiResponse<>(
+                "User created successfully",
+                HttpStatus.OK,
+                user
+        );
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    public ResponseEntity<ApiResponse<User>> getUserById(@PathVariable Long id) {
+        User user = userService.getUserById(id);
+
+        ApiResponse<User> response = new ApiResponse<>(
+                "Get user successfully",
+                HttpStatus.OK,
+                user
+        );
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

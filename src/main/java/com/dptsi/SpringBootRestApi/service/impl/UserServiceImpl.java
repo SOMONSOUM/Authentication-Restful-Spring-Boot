@@ -1,6 +1,7 @@
 package com.dptsi.SpringBootRestApi.service.impl;
 
 import com.dptsi.SpringBootRestApi.dto.request.RegisterUserRequest;
+import com.dptsi.SpringBootRestApi.exception.EntityAlreadyExistedException;
 import com.dptsi.SpringBootRestApi.model.User;
 import com.dptsi.SpringBootRestApi.repository.UserRepository;
 import com.dptsi.SpringBootRestApi.service.UserService;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
     public User createUser(RegisterUserRequest request) {
         Optional<User> existingUser = userRepository.findByEmail(request.getEmail());
         if (existingUser.isPresent()) {
-            throw new RuntimeException("User already exists");
+            throw new EntityAlreadyExistedException("User already exists");
         }
 
         String hashed = passwordEncoder.encode(request.getPassword());
