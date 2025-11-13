@@ -10,6 +10,8 @@ import com.dptsi.SpringBootRestApi.dto.response.RefreshTokenResponse;
 import com.dptsi.SpringBootRestApi.model.User;
 import com.dptsi.SpringBootRestApi.service.AuthService;
 import com.dptsi.SpringBootRestApi.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@Tag(name = "Authentication")
 public class AuthController {
     private final AuthService authService;
     private final UserService userService;
@@ -27,6 +30,7 @@ public class AuthController {
         this.userService = userService;
     }
 
+    @Operation(summary = "Login")
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<LoginResponse>> login(@Valid @RequestBody LoginRequest request) {
         LoginResponse response = authService.login(request);
