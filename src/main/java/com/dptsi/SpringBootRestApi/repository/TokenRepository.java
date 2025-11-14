@@ -1,7 +1,7 @@
 package com.dptsi.SpringBootRestApi.repository;
 
-import com.dptsi.SpringBootRestApi.model.Token;
-import com.dptsi.SpringBootRestApi.model.User;
+import com.dptsi.SpringBootRestApi.entity.Token;
+import com.dptsi.SpringBootRestApi.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

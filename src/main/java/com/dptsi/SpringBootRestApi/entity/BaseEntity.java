@@ -1,4 +1,4 @@
-package com.dptsi.SpringBootRestApi.model;
+package com.dptsi.SpringBootRestApi.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -7,7 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-public class BaseModel {
+public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -7,7 +7,7 @@ import com.dptsi.SpringBootRestApi.dto.request.RegisterUserRequest;
 import com.dptsi.SpringBootRestApi.dto.response.ApiResponse;
 import com.dptsi.SpringBootRestApi.dto.response.LoginResponse;
 import com.dptsi.SpringBootRestApi.dto.response.RefreshTokenResponse;
-import com.dptsi.SpringBootRestApi.model.User;
+import com.dptsi.SpringBootRestApi.entity.User;
 import com.dptsi.SpringBootRestApi.service.AuthService;
 import com.dptsi.SpringBootRestApi.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;

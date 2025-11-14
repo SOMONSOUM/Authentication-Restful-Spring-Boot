@@ -5,7 +5,7 @@ import com.dptsi.SpringBootRestApi.dto.request.LogoutRequest;
 import com.dptsi.SpringBootRestApi.dto.request.RefreshTokenRequest;
 import com.dptsi.SpringBootRestApi.dto.response.LoginResponse;
 import com.dptsi.SpringBootRestApi.dto.response.RefreshTokenResponse;
-import com.dptsi.SpringBootRestApi.model.User;
+import com.dptsi.SpringBootRestApi.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 
 public interface AuthService {

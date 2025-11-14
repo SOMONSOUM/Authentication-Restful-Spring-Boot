@@ -1,4 +1,4 @@
-package com.dptsi.SpringBootRestApi.model;
+package com.dptsi.SpringBootRestApi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseModel {
+public class User extends BaseEntity {
     @Column(name = "email", nullable = false)
     @Email(message = "Email is not valid")
     @Size(min = 5, max = 100)

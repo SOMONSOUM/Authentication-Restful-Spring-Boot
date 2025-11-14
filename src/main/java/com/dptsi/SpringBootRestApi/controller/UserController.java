@@ -2,7 +2,7 @@ package com.dptsi.SpringBootRestApi.controller;
 
 import com.dptsi.SpringBootRestApi.dto.request.RegisterUserRequest;
 import com.dptsi.SpringBootRestApi.dto.response.ApiResponse;
-import com.dptsi.SpringBootRestApi.model.User;
+import com.dptsi.SpringBootRestApi.entity.User;
 import com.dptsi.SpringBootRestApi.service.impl.UserServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

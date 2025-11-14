@@ -1,4 +1,4 @@
-package com.dptsi.SpringBootRestApi.model;
+package com.dptsi.SpringBootRestApi.entity;
 
 import jakarta.persistence.*;
 
@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tokens")
-public class Token extends BaseModel {
+public class Token extends BaseEntity {
     @Column(name = "token", unique = true)
     private String token;
 

@@ -2,7 +2,7 @@ package com.dptsi.SpringBootRestApi.service.impl;
 
 import com.dptsi.SpringBootRestApi.dto.request.RegisterUserRequest;
 import com.dptsi.SpringBootRestApi.exception.EntityAlreadyExistedException;
-import com.dptsi.SpringBootRestApi.model.User;
+import com.dptsi.SpringBootRestApi.entity.User;
 import com.dptsi.SpringBootRestApi.repository.UserRepository;
 import com.dptsi.SpringBootRestApi.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
